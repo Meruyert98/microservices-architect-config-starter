@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  "wishlist"
+  namespace: ms
+  labels:
+    app:  "wishlist"
+spec:
+  selector:
+    matchLabels:
+      app: "wishlist"
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  "wishlist"
+    spec:
+      containers:
+      - name:  "wishlist"
+        image:  meruyerts/wishlist
+        ports:
+        - containerPort:  5000
+          name:  "wishlist"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wishlist
+  namespace: ms
+spec:
+  selector:
+    app: "wishlist"
+  type: ClusterIP
+  ports:
+  - name: wishlist
+    port: 1003
+    targetPort: 5000

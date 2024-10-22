@@ -69,4 +69,16 @@ cd wishlist-microservice-python
 docker build . -t wish
 
 docker images
+
+docker run -d -p 8080:8080 ui
+
+docker run -d -p 9999:9999 zuul-api
+
+docker run -d -p 1002:1002 shoes
+
+docker run -d -p 1001:1001 offers
+
+docker run -d -p 1004:1004 cart
+
+docker run -d -p 1003:1003 wish
 ```
